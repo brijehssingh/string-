@@ -1,0 +1,58 @@
+// strign streams
+
+
+  #include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	
+	string text = " Alice,24,Engineer"; 
+	
+	 stringstream ss(text);
+	  
+	   string ans ; 
+	    
+	    while(getline(ss , ans, ',')){
+	        cout<<ans<<endl; 
+	        
+	    }
+
+}
+
+
+// ostringstream
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	
+	ostringstream ss;
+	 ss<<"pi is approximately "<<3.14;
+	  
+	  std::cout << ss.str() << std::endl;
+
+}
+
+//istringstream
+
+ #include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	
+	istringstream  iss("100 3.14 hello");
+	int a ;
+	 double b; 
+	 string c;
+	   
+	    iss>>a>>b>>c; 
+	    
+	    std::cout << a << std::endl<<b<<endl <<c ;
+	 
+
+}
+
