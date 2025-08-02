@@ -1,0 +1,76 @@
+//kmp 
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int n;
+vector<int> lps;
+
+// Function to compute LPS array
+void findlps(string pattern) {
+    n = pattern.size();             // Ensure n is initialized here
+    lps.resize(n);                  // Initialize lps with correct size
+    lps[0] = 0;
+
+    int len = 0;
+
+    for (int i = 1; i < n;) {
+        if (pattern[i] == pattern[len]) {
+            len++;
+            lps[i] = len;
+            i++;
+        } else {
+            if (len != 0) {
+                len = lps[len - 1]; // backtrack
+            } else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+}
+
+// KMP pattern matching
+vector<int> kmp(string text, string pattern) {
+    n = pattern.size();
+    int m = text.size();
+
+    vector<int> ans;
+    findlps(pattern);
+
+    int i = 0, j = 0;
+
+    while (i < m) {
+        if (pattern[j] == text[i]) {
+            i++;
+            j++;
+        }
+
+        if (j == n) {
+            ans.push_back(i - j);
+            j = lps[j - 1]; // do NOT increment i and j
+        } else if (i < m && pattern[j] != text[i]) {
+            if (j != 0) {
+                j = lps[j - 1];
+            } else {
+                i++;
+            }
+        }
+    }
+
+    return ans;
+}
+
+int main() {
+    string text = "ababcabcabababd";
+    string pattern = "ababd";
+
+    vector<int> position = kmp(text, pattern);
+
+    for (size_t i : position) {
+        cout << "position " << i << endl;
+    }
+
+    return 0;
+}
